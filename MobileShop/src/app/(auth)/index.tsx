@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Index() {
   return (
     <SafeAreaView>
-        <Text style={styles.labels}>Name   dd</Text>
+        <Text style={styles.labels}>Name</Text>
         <TextInput style={styles.textField} />
     </SafeAreaView>
   );
