@@ -4,7 +4,7 @@ import TextField from "@/components/TextField";
 export default function Index() {
   return (
     <SafeAreaView>
-      <TextField />
+      <TextField label={"Name"} placeholder={"Please enter your name"} />
     </SafeAreaView>
   );
 }
