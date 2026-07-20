@@ -19,7 +19,7 @@ jobs:
           cache-dependency-path: mobileshop/package-lock.json
 
       - name: Install dependencies
-        working-directory: /
+        # working-directory: mobileshop
         run: npm ci
 
       - run: npm run lint
