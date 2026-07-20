@@ -1,13 +1,21 @@
+import "../../global.css"
+
 import {StyleSheet, Text, TextInput} from "react-native";
 
-const TextField = () => {
+interface TextFieldProps {
+    label: string;
+    placeholder: string;
+}
+
+const TextField = ({label, placeholder} : TextFieldProps) => {
   return (
       <>
-          <Text style={styles.labels}>Name</Text>
-          <TextInput style={styles.textField} />
+          <Text className={"text-lg"} style={styles.label}>{label}</Text>
+          <TextInput style={styles.textField} placeholder={placeholder} />
       </>
   )
 }
+
 const styles = StyleSheet.create({
 
     container: {
@@ -16,8 +24,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
 
-    labels: {
-        fontSize: 16,
+    label: {
+        // fontSize: 16,
         marginBottom: 5,
     },
 
