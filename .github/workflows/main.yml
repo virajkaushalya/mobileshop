@@ -16,14 +16,13 @@ jobs:
         with:
           node-version: 25
           cache: npm
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: mobileshop/package-lock.json
 
       - name: Install dependencies
+        working-directory: mobileshop
         run: npm ci
 
       - run: npm run lint
 
       # Uncomment if have tests
       # - run: npm test
-
-      
