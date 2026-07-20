@@ -1,10 +1,13 @@
-import { SafeAreaView } from "react-native-safe-area-context";
+import {SafeAreaView} from "react-native-safe-area-context";
 import TextField from "@/components/TextField";
 
 export default function Index() {
-  return (
-    <SafeAreaView>
-      <TextField label={"Name"} placeholder={"Please enter your name"} />
-    </SafeAreaView>
-  );
+    return (
+        <SafeAreaView>
+
+            <TextField label={"Name"} placeholder={"Please enter your name"}/>
+            <TextField label={"Password"} placeholder={"Enter Password"}/>
+
+        </SafeAreaView>
+    );
 }
