@@ -7,6 +7,9 @@ import {useState} from "react";
 
 export default function SignInScreen() {
 
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     const [isPasswordVisible, setPasswordVisible] = useState(false);
     const [isSigningIn, setSigningIn] = useState(false);
 
@@ -65,6 +68,8 @@ export default function SignInScreen() {
                             <FontAwesome name={'user'} size={18} style={{color: '#6B7280', paddingRight: 8}}/>
 
                             <TextInput
+                                value={email}
+                                onChangeText={(text) => setEmail(text)}
                                 placeholder={'Email Address'}
                                 placeholderTextColor={placeholderColour}
                                 className={'flex-1 text-foreground'}
@@ -78,6 +83,11 @@ export default function SignInScreen() {
                             <FontAwesome name={'lock'} size={18} style={{color: '#6B7280', paddingRight: 8}}/>
 
                             <TextInput
+                                value={password}
+                                onChangeText={(text) => {
+                                    setPassword(text);
+                                    console.log("Printing Text: ", password);
+                                }}
                                 placeholder={'Password'}
                                 placeholderTextColor={placeholderColour}
                                 className={'flex-1 text-foreground'}
@@ -98,6 +108,10 @@ export default function SignInScreen() {
                             disabled={isSigningIn}
                             onPress={() => {
                                 setSigningIn(true)
+
+                                // TODO: Update here
+                                console.log("email    --> ", email);
+                                console.log("password --> ", password);
                             }}
                         >
                             <Text className={'text-foreground'}>
