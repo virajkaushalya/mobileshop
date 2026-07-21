@@ -1,3 +1,83 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 210 40% 98%;
+        --foreground: 222 47% 11%;
+
+        --card: 0 0% 100%;
+        --card-foreground: 222 47% 11%;
+
+        --primary: 217 91% 60%;
+        --primary-foreground: 0 0% 100%;
+
+        --secondary: 214 32% 91%;
+        --secondary-foreground: 222 47% 20%;
+
+        --muted: 214 32% 95%;
+        --muted-foreground: 215 16% 47%;
+
+        --accent: 213 94% 88%;
+
+        --destructive: 0 84% 95%;
+        --destructive-foreground: 0 72% 45%;
+
+        --border: 214 32% 86%;
+        --input: 214 32% 86%;
+
+        --ring: 217 91% 60%;
+
+        --success: 142 71% 45%;
+
+        --priority-low: 212 100% 94%;
+        --priority-low-foreground: 215 85% 38%;
+
+        --priority-medium: 45 100% 90%;
+        --priority-medium-foreground: 35 91% 31%;
+
+        --priority-high: 0 100% 93%;
+        --priority-high-foreground: 0 70% 45%;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --background: 222 47% 8%;
+            --foreground: 210 40% 96%;
+
+            --card: 222 47% 11%;
+            --card-foreground: 210 40% 96%;
+
+            --primary: 213 94% 68%;
+            --primary-foreground: 222 47% 10%;
+
+            --secondary: 222 32% 18%;
+            --secondary-foreground: 214 32% 90%;
+
+            --muted: 222 28% 15%;
+            --muted-foreground: 215 20% 65%;
+
+            --accent: 217 33% 22%;
+
+            --destructive: 0 40% 20%;
+            --destructive-foreground: 0 85% 80%;
+
+            --border: 222 20% 24%;
+            --input: 222 20% 24%;
+
+            --ring: 213 94% 68%;
+
+            --success: 142 65% 52%;
+
+            --priority-low: 215 45% 24%;
+            --priority-low-foreground: 210 70% 84%;
+
+            --priority-medium: 40 30% 24%;
+            --priority-medium-foreground: 45 90% 82%;
+
+            --priority-high: 0 35% 24%;
+            --priority-high-foreground: 0 80% 84%;
+        }
+    }
+}
