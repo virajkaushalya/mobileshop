@@ -1,12 +1,12 @@
 import React from 'react';
 import {Text, View} from "react-native";
 
-const Delivery = () => {
+const Report = () => {
     return (
         <View>
-            <Text>This is Delivery Page</Text>
+            <Text>This is Report Page</Text>
         </View>
     );
 };
 
-export default Delivery;
+export default Report;
