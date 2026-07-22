@@ -1,4 +1,4 @@
-import {DarkTheme, DefaultTheme, Stack, ThemeProvider} from "expo-router";
+import {DarkTheme, DefaultTheme, Redirect, Stack, ThemeProvider} from "expo-router";
 import "../../global.css";
 import {useColorScheme} from "react-native";
 
@@ -10,6 +10,7 @@ export default function RootLayout() {
     return (
         <ThemeProvider value={colourScheme === "dark" ? DarkTheme : DefaultTheme}>
             <Stack screenOptions={{headerShown: false}}/>
+            {/*<Redirect href={'/(auth)/sign-in'}/>*/}
         </ThemeProvider>
     );
 
