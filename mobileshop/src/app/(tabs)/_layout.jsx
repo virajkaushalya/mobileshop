@@ -14,12 +14,18 @@ export default function TabsLayout() {
 
             <NativeTabs.Trigger name="index">
                 <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
-                <NativeTabs.Trigger.Icon sf="house.fill" md="home"/>
+                <NativeTabs.Trigger.Icon sf={{
+                    default: "house",
+                    selected: "house.fill"
+                }} md="home"/>
             </NativeTabs.Trigger>
 
-            <NativeTabs.Trigger name="delivery">
-                <NativeTabs.Trigger.Icon sf="gear" md="settings"/>
-                <NativeTabs.Trigger.Label>Settings</NativeTabs.Trigger.Label>
+            <NativeTabs.Trigger name="report">
+                <NativeTabs.Trigger.Icon sf={{
+                    default: "list.clipboard",
+                    selected: "list.clipboard.fill"
+                }} md="docs"/>
+                <NativeTabs.Trigger.Label>Report</NativeTabs.Trigger.Label>
             </NativeTabs.Trigger>
 
         </NativeTabs>
