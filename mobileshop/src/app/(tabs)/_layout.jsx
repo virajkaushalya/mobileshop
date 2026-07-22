@@ -1,7 +1,6 @@
 import React from 'react';
 import {NativeTabs} from "expo-router/build/native-tabs";
 import {useColorScheme} from "nativewind";
-import colors from "tailwindcss/colors";
 
 export default function TabsLayout() {
 
