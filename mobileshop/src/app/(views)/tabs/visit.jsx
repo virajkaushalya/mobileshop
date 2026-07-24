@@ -8,9 +8,10 @@ import TitleDescriptionTile from "../../../components/TitleDescriptionTile";
 import FontAwesome from "@react-native-vector-icons/fontawesome";
 import {Image} from "expo-image";
 import {formatCurrencyInput} from "../../../ulitily/inputFormatter";
+import SubmitButton from "../../../components/SubmitButton";
 
 
-const Visit = () => {
+const Visit = ({}) => {
 
     const [requestData, setRequestData] = useState('');
     const [remarkData, setRemarkData] = useState('');
@@ -22,7 +23,7 @@ const Visit = () => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <ScrollView className={'flex-1 mt-4'}>
 
-                <View className={'bg-transparent'}>
+                <View className={'bg-transparent px-1'}>
 
                     {/* Shop Request Text Field */}
                     <MultiLineTextField
@@ -45,7 +46,7 @@ const Visit = () => {
                 </View>
 
                 {/* Payment Details */}
-                <SafeAreaView className={'flex-1 bg-secondary rounded-t-3xl mt-2'} edges={["bottom"]}>
+                <SafeAreaView className={'flex-1 bg-secondary rounded-t-3xl mt-2'} edges={[]}>
                     <View className={'py-6 px-2'}>
 
                         <View className={'pl-4 pb-4 mb-4'}>
@@ -171,14 +172,12 @@ const Visit = () => {
 
                         </View>
 
-                        <Pressable
-                            className={'mx-4 mt-8 mb-4 py-4 bg-primary/80 rounded-xl flex-1 justify-center items-center'}
+                        <SubmitButton
+                            text={"Complete Visit"}
                             onPress={() => {
                                 console.log("visit.jsx | SUBMIT PRESSED")
                             }}
-                        >
-                            <Text className={'text-foreground font-semibold uppercase tracking-[2px]'}>Submit</Text>
-                        </Pressable>
+                        />
 
 
                     </View>
