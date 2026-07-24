@@ -11,3 +11,10 @@ export const formatCurrencyInput = (value) => {
         ? `${integerPart}.${parts[1]}`
         : integerPart;
 };
+
+export const formatCurrency = (amount = 0) => (
+    `Rs. ${Number(amount).toLocaleString("en-LK", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    })}`
+);
