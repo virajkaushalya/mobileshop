@@ -3,6 +3,7 @@ import FontAwesome from "@react-native-vector-icons/fontawesome";
 import {Checkbox, Host} from "@expo/ui";
 import {useState} from "react";
 import {SafeAreaView} from "react-native-safe-area-context";
+import SubmitButton from "../../../components/SubmitButton";
 
 const Delivery = () => {
 
@@ -34,66 +35,74 @@ const Delivery = () => {
     };
 
     return (
-        <SafeAreaView className={'flex-1'}>
-            <View className={'px-4 py-6 bg-transparent'}>
-                <View className={''}>
-                    <Text className={'text-3xl text-foreground font-semibold'}>Delivery Details</Text>
-                    <Text className={'text-foreground/60'}>Below are the list of devices needed to be handover</Text>
-                </View>
+        <View className={'flex-1 px-4 py-6 bg-transparent'}>
+            <View className={''}>
+                <Text className={'text-3xl text-foreground font-semibold'}>Delivery Details</Text>
+                <Text className={'text-foreground/60'}>Below are the list of devices needed to be handover</Text>
+            </View>
 
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    className="mt-6"
-                    data={devices}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({item}) => {
+            <FlatList
+                showsVerticalScrollIndicator={false}
+                className="flex-1 mt-6"
+                data={devices}
+                keyExtractor={(item) => item.id}
+                renderItem={({item}) => {
 
-                        return (
+                    return (
+                        <View className="flex-row items-center bg-card rounded-3xl border border-border px-4 py-4 mb-3 shadow-sm">
 
-                            <View className="flex-row bg-card mb-2 px-4 py-2 rounded-2xl border border-primary/30">
-
-                                <View className={'self-center'}><FontAwesome
+                            <View className="h-16 w-16 rounded-2xl bg-primary/10 items-center justify-center">
+                                <FontAwesome
                                     name="mobile-phone"
-                                    size={48}
+                                    size={34}
                                     color={iconColour}
-                                /></View>
+                                />
+                            </View>
 
-                                <View className="flex-1 ml-6 justify-around">
-                                    <Text className="text-foreground text-2xl">
-                                        {item.name}
-                                    </Text>
+                            <View className="flex-1 ml-4">
 
-                                    <Text className="text-foreground/50 text-sm">
-                                        Requested Count: {item.requested}
-                                    </Text>
-                                </View>
+                                <Text className="text-xl font-semibold text-foreground">
+                                    {item.name}
+                                </Text>
 
-                                <View className="ml-4 py-2 items-center">
-                                    <Text className="text-foreground/50 text-5xl">
-                                        {item.issuing}
-                                    </Text>
-
-                                    <Text className="text-foreground/50 text-xs">
-                                        Issuing Count
-                                    </Text>
-                                </View>
-
-                                <View className="justify-center ml-4">
-                                    <Host matchContents className={''}>
-                                        <Checkbox
-                                            value={item.checked}
-                                            onValueChange={() => toggleCheckbox(item.id)}
-                                        />
-                                    </Host>
-                                </View>
+                                <Text className="text-sm text-foreground/60 mt-1">
+                                    Requested {item.requested} devices
+                                </Text>
 
                             </View>
-                        );
-                    }}
-                />
 
-            </View>
-        </SafeAreaView>
+                            <View className="items-center mr-4">
+
+                                <Text className="text-4xl font-bold text-primary">
+                                    {item.issuing}
+                                </Text>
+
+                                <Text className="text-xs text-foreground/50 mt-1">
+                                    Issuing
+                                </Text>
+
+                            </View>
+
+                            <Host matchContents>
+                                <Checkbox
+                                    value={item.checked}
+                                    onValueChange={() => toggleCheckbox(item.id)}
+                                />
+                            </Host>
+
+                        </View>
+                    );
+                }}
+            />
+
+            <SubmitButton
+                text={"Complete Delivery"}
+                onPress={() => {
+                    console.log("delivery.jsx | SUBMIT PRESSED")
+                }}
+            />
+
+        </View>
     );
 }
 
