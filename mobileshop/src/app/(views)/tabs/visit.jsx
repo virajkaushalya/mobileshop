@@ -9,6 +9,7 @@ import FontAwesome from "@react-native-vector-icons/fontawesome";
 import {Image} from "expo-image";
 import {formatCurrencyInput} from "../../../ulitily/inputFormatter";
 import SubmitButton from "../../../components/SubmitButton";
+import ChequeDataTile from "../../../components/ChequeDataTile";
 
 
 const Visit = ({}) => {
@@ -18,6 +19,8 @@ const Visit = ({}) => {
     const [cashData, setCashData] = useState('');
     const [chequeNumberData, setChequeNumberData] = useState('');
     const [chequeAmountData, setChequeAmountData] = useState('');
+
+    const closeIconColor = 'hsl(0 0% 74%)'
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -142,30 +145,7 @@ const Visit = ({}) => {
                                 style={{gap: 2}}
                                 renderItem={
                                     (i) => {
-                                        return (
-                                            <View
-                                                className={'mx-3 mb-2 px-5 py-3 flex-1 flex-row bg-white/50 dark:bg-white/20 rounded-3xl border border-gray-400 dark:border-white/40'}>
-
-                                                <View className={'mr-3'}>
-                                                    <Text className={'font-semibold text-foreground'}>Cheque Number</Text>
-                                                    <Text className={'mt-2 text-foreground'}>Amount</Text>
-                                                </View>
-
-                                                <View className={'flex-1'}>
-                                                    <Text className={'font-semibold text-foreground'}>: 2891813882918313</Text>
-                                                    <Text className={'mt-2 text-foreground'}>: Rs. 10000</Text>
-                                                </View>
-
-                                                <Image
-                                                    source={require('../../../../assets/temp/temp_img.png')}
-                                                    style={{
-                                                        width: 48,
-                                                        height: 64,
-                                                        borderRadius: 12,
-                                                    }}/>
-
-                                            </View>
-                                        )
+                                        return <ChequeDataTile chequeNumber={'2891813882918313'} amount={'10000'} iconColor={closeIconColor} onPress={() => {}} />
                                     }
                                 }>
                             </FlatList>
