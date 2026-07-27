@@ -1,10 +1,11 @@
 import {SafeAreaView} from "react-native-safe-area-context";
 import {Keyboard, Pressable, Text, TextInput, TouchableWithoutFeedback, useColorScheme, View} from "react-native";
-import {SignInScreenData} from "@/data/SignInScreenData";
 import {Image} from "expo-image";
 import FontAwesome from "@react-native-vector-icons/fontawesome";
 import {useState} from "react";
-import {router} from "expo-router";
+import TextFieldErrorMessage from "../../components/TextFieldErrorMessage";
+import {SignInScreenData} from "../../data/SignInScreenData";
+import {useSignIn} from "../../hooks/useSignIn";
 
 export default function SignInScreen() {
 
@@ -12,7 +13,8 @@ export default function SignInScreen() {
     const [password, setPassword] = useState("");
 
     const [isPasswordVisible, setPasswordVisible] = useState(false);
-    const [isSigningIn, setSigningIn] = useState(false);
+
+    const {signIn, emailError, passwordError, isSigningIn} = useSignIn();
 
     const colourScheme = useColorScheme();
     const placeholderColour = colourScheme === "dark" ? "hsl(210 40% 96%)" : "hsl(222 47% 11%)";
@@ -64,7 +66,7 @@ export default function SignInScreen() {
                     <View className={'mt-6'}>
 
                         {/* Username Field */}
-                        <View className={'mb-5 px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring'}>
+                        <View className={'px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring'}>
 
                             <FontAwesome name={'user'} size={18} style={{color: '#6B7280', paddingRight: 8}}/>
 
@@ -77,9 +79,10 @@ export default function SignInScreen() {
                                 keyboardType={"email-address"}
                             />
                         </View>
+                        <TextFieldErrorMessage errorMessage={emailError} marginBottom={'mb-5'}/>
 
                         {/* Password Field */}
-                        <View className={'mb-3 px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring'}>
+                        <View className={'px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring'}>
 
                             <FontAwesome name={'lock'} size={18} style={{color: '#6B7280', paddingRight: 8}}/>
 
@@ -95,26 +98,26 @@ export default function SignInScreen() {
                                 secureTextEntry={!isPasswordVisible}
                             />
 
-                            <FontAwesome
-                                name={isPasswordVisible ? "eye-slash" : "eye"}
-                                size={18}
-                                style={{color: 'rgb(75 85 99 / 0.74)', paddingRight: 8}}
-                                onPress={() => setPasswordVisible(!isPasswordVisible)}
-                            />
+                            {/* Password hide/unhide button*/}
+                            <Pressable
+                                onPressIn={() => setPasswordVisible(!isPasswordVisible)}
+                                onPressOut={() => setPasswordVisible(!isPasswordVisible)}
+                            >
+                                <FontAwesome
+                                    name={isPasswordVisible ? "eye-slash" : "eye"}
+                                    size={18}
+                                    style={{color: 'rgb(75 85 99 / 0.74)', paddingRight: 8}}
+                                />
+                            </Pressable>
 
                         </View>
+                        <TextFieldErrorMessage errorMessage={passwordError} marginBottom={'mb-3'}/>
 
+                        {/* Sign-In button */}
                         <Pressable
                             className={`mt-6 px-4 py-3 flex-row items-center justify-center rounded-2xl border border-border bg-primary/80 ${isSigningIn ? 'bg-white/40' : ''} `}
                             disabled={isSigningIn}
-                            onPress={() => {
-                                setSigningIn(true)
-
-                                // TODO: Update here
-                                console.log("email    --> ", email);
-                                console.log("password --> ", password);
-                                router.push('../(tabs)');
-                            }}
+                            onPress={() => signIn(email, password)}
                         >
                             <Text className={'text-foreground'}>
                                 {isSigningIn ? SignInScreenData.signingIn : SignInScreenData.submitBtn}
