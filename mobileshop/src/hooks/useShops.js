@@ -5,6 +5,7 @@ export function useShops() {
 
     const [shops, setShops] = useState([]);
     const [loading, setLoading] = useState(true);
+    // const [progress, setProgress] = useState(0.0);
 
 
     useEffect(() => {
@@ -24,9 +25,24 @@ export function useShops() {
 
     }, []);
 
+    const progress = countProgress(shops);
+
+    console.log("Progress --> ", progress);
 
     return {
         shops,
-        loading
+        loading,
+        progress,
     };
+}
+
+function countProgress(shops) {
+    const totalShops = shops.length;
+    const completedShopsCnt = shops.filter((shop) => shop.isVisitCompleted).length;
+
+    console.log("total shops", totalShops);
+    console.log("completed", completedShopsCnt);
+
+    return completedShopsCnt / totalShops;
+
 }

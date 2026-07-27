@@ -8,9 +8,9 @@ import {useShops} from "../../hooks/useShops";
 
 const Index = () => {
 
-    const [progress, setProgress] = useState(0.4);
+    // const [progress, setProgress] = useState(0.4);
 
-    const {shops, loading} = useShops();
+    const {shops, loading, progress} = useShops();
 
     const currentDate = new Date().toDateString();
 
