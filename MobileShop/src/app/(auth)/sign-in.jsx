@@ -90,7 +90,6 @@ export default function SignInScreen() {
                                 value={password}
                                 onChangeText={(text) => {
                                     setPassword(text);
-                                    console.log("Printing Text: ", password);
                                 }}
                                 placeholder={'Password'}
                                 placeholderTextColor={placeholderColour}
