@@ -10,7 +10,7 @@ export default function RootLayout() {
     return (
         <ThemeProvider value={colourScheme === "dark" ? DarkTheme : DefaultTheme}>
             <Stack screenOptions={{headerShown: false}}/>
-            {/*<Redirect href={'/(auth)/sign-in'}/>*/}
+            <Redirect href={'/(auth)/sign-in'}/>
         </ThemeProvider>
     );
 
