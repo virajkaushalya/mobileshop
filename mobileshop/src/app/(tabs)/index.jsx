@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
-import {ScrollView, Text, View} from "react-native";
+import {FlatList, ScrollView, Text, View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import ShopTile from "../../components/ShopTile";
 import {HomeScreenData} from "../../data/HomeScreenData";
 import ScreenBackground from "../../components/ScreenBackground";
+import {useShops} from "../../hooks/useShops";
 
 const Index = () => {
 
     const [progress, setProgress] = useState(0.4);
+
+    const {shops, loading} = useShops();
 
     const currentDate = new Date().toDateString();
 
@@ -21,7 +24,7 @@ const Index = () => {
     return (
         <View className={'flex-1'}>
 
-            <ScreenBackground />
+            <ScreenBackground/>
 
             <View className={'px-4 pb-4 pt-6 mb-4 bg-secondary rounded-b-3xl'}>
                 <SafeAreaView edges={["top", "left", "right"]}>
@@ -46,28 +49,26 @@ const Index = () => {
                         />
                     </View>
 
-                    <Text className={`${progress === 1 ? "text-green-600" : "text-foreground/40"} text-xs font-semibold`}>{progressStatus}</Text>
+                    <Text
+                        className={`${progress === 1 ? "text-green-600" : "text-foreground/40"} text-xs font-semibold`}>{progressStatus}</Text>
 
                 </View>
             </View>
 
-            <ScrollView
+            <FlatList
+                data={shops}
                 className={'flex-1 px-4'}
                 contentContainerClassName={'gap-2 pb-4'}
-            >
-
-                {
-                    Array.from({length: 9}).map((_, index) => (
+                renderItem={
+                    (shop, index) => (
                         <ShopTile
                             key={index}
-                            shopName={"GenXT Mobiles"}
-                            address={"No.34/A, Chapel Lane, Nugegoda, Colombo 16"}
-                            mobileNumber={"0710123423"}
+                            shopName={shop.item.shopName}
+                            address={shop.item.address}
+                            mobileNumber={shop.item.contactNumber}
                         />
-                    ))
-                }
-
-            </ScrollView>
+                    )}
+            />
 
         </View>
     );

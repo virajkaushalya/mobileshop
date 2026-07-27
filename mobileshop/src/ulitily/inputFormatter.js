@@ -18,3 +18,19 @@ export const formatCurrency = (amount = 0) => (
         maximumFractionDigits: 2,
     })}`
 );
+
+/**
+ * First process to get only digit, in case if number contains '-' or spaces. e.g. 071-2345-123 (these numbers will still format)
+ * then it process to format the given number
+ **/
+export const formatMobileNumber = ({mobileNumber}) => {
+    if (!mobileNumber) return "No mobile number";
+
+    const number = String(mobileNumber).replace(/\D/g, "");
+
+    if (number.length === 10 && number.startsWith("07")) {
+        return `(${number.slice(0, 3)}) ${number.slice(3, 6)} ${number.slice(6)}`;
+    }
+
+    return mobileNumber;
+};

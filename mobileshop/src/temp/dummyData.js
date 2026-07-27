@@ -1,3 +1,5 @@
+import Shop from "../model/Shop";
+
 export const visitPayments = [
     {
         id: "1",
@@ -25,4 +27,18 @@ export const visitPayments = [
         cash: 16000,
         cheques: [],
     },
+];
+
+
+export const visitingShopsList = [
+    new Shop("101", "Sunrise Mart", "12 Main Street, Colombo", "0711111222"),
+    new Shop("102", "Green Valley Stores", "45 Temple Road, Kandy", "0711111333"),
+    new Shop("103", "City Choice Super", "78 Galle Road, Galle", "0711111444"),
+    new Shop("104", "Fresh Corner", "23 Station Road, Kurunegala", "0711111555"),
+    new Shop("105", "Family Grocery", "56 Market Street, Negombo", "0711111666"),
+    new Shop("106", "Ocean View Shop", "91 Beach Road, Matara", "0711111777"),
+    new Shop("107", "Lucky Traders", "14 Hospital Road, Anuradhapura", "0711111888"),
+    new Shop("108", "Daily Needs", "67 Lake Road, Badulla", "0711111999"),
+    new Shop("109", "Royal Mini Mart", "39 High Level Road, Maharagama", "0711112000"),
+    new Shop("110", "Prime Retail Hub", "88 New Town Road, Jaffna", "0711112111"),
 ];
