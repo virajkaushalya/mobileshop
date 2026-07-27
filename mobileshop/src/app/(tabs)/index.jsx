@@ -60,12 +60,11 @@ const Index = () => {
                 className={'flex-1 px-4'}
                 contentContainerClassName={'gap-2 pb-4'}
                 renderItem={
-                    (shop, index) => (
+                    ({item}) => (
                         <ShopTile
-                            key={index}
-                            shopName={shop.item.shopName}
-                            address={shop.item.address}
-                            mobileNumber={shop.item.contactNumber}
+                            shopName={item.shopName}
+                            address={item.address}
+                            mobileNumber={item.contactNumber}
                         />
                     )}
             />
