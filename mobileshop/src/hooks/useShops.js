@@ -27,8 +27,6 @@ export function useShops() {
 
     const progress = countProgress(shops);
 
-    console.log("Progress --> ", progress);
-
     return {
         shops,
         loading,
@@ -40,9 +38,5 @@ function countProgress(shops) {
     const totalShops = shops.length;
     const completedShopsCnt = shops.filter((shop) => shop.isVisitCompleted).length;
 
-    console.log("total shops", totalShops);
-    console.log("completed", completedShopsCnt);
-
     return completedShopsCnt / totalShops;
-
 }
