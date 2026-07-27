@@ -4,6 +4,7 @@ import {SignInScreenData} from "@/data/SignInScreenData";
 import {Image} from "expo-image";
 import FontAwesome from "@react-native-vector-icons/fontawesome";
 import {useState} from "react";
+import {router} from "expo-router";
 
 export default function SignInScreen() {
 
@@ -112,6 +113,7 @@ export default function SignInScreen() {
                                 // TODO: Update here
                                 console.log("email    --> ", email);
                                 console.log("password --> ", password);
+                                router.push('../(tabs)');
                             }}
                         >
                             <Text className={'text-foreground'}>
