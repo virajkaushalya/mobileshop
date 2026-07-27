@@ -1,5 +1,7 @@
 import {useState} from "react";
 import {emailValidation, passwordValidation} from "../validations/auth.validation";
+import {authService} from "../services/authService";
+import {router} from "expo-router";
 
 export function useSignIn() {
     const [emailError, setEmailError] = useState("");
@@ -31,8 +33,9 @@ export function useSignIn() {
 
         // API login here
         // await authService.login(email,password)
+        authService({email: email, password: password}) && router.replace('../(tabs)')
 
-        // setSigningIn(false);
+        setSigningIn(false);
 
         return true;
     };
