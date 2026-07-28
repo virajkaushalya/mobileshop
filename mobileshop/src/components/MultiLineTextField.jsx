@@ -2,6 +2,7 @@ import "../../global.css"
 
 import {Text, TextInput, useColorScheme, View} from "react-native";
 import TitleDescriptionTile from "./TitleDescriptionTile";
+import TextFieldErrorMessage from "./TextFieldErrorMessage";
 
 const MultiLineTextField = ({
                                 title,
@@ -12,8 +13,10 @@ const MultiLineTextField = ({
                                 keyboardType = "default",
                                 onChangeText,
                                 readOnly = false,
+                                errorMessage = "",
                             }) => {
 
+    const isError = errorMessage;
     const colourScheme = useColorScheme();
     const placeholderColour = colourScheme === "dark" ? "hsl(219 9% 44%)" : "hsl(219 9% 44%)";
 
@@ -22,7 +25,7 @@ const MultiLineTextField = ({
 
             <TitleDescriptionTile title={title} description={description}/>
 
-            <View className={'mb-5 px-2 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring'}>
+            <View className={`px-2 flex-row items-center rounded-2xl border border-border bg-card ${(isError ? 'border-red-600 focus:border-red-600' : 'mb-5 focus:border-ring')}`}>
                 <TextInput
                     className={'flex-1 min-h-32 text-foreground'}
                     value={value}
@@ -38,6 +41,8 @@ const MultiLineTextField = ({
                     readOnly={readOnly}
                 />
             </View>
+
+            {isError && <TextFieldErrorMessage errorMessage={errorMessage} marginBottom={'mb-5'}/>}
 
         </View>
     )
