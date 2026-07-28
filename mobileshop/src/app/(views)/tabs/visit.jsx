@@ -7,18 +7,38 @@ import SingleLineTextField from "../../../components/SingleLineTextField";
 import TitleDescriptionTile from "../../../components/TitleDescriptionTile";
 import FontAwesome from "@react-native-vector-icons/fontawesome";
 import {Image} from "expo-image";
-import {formatCurrencyInput} from "../../../ulitily/inputFormatter";
+import {formatChequeNumberInput, formatCurrencyInput} from "../../../ulitily/inputFormatter";
 import SubmitButton from "../../../components/SubmitButton";
 import ChequeDataTile from "../../../components/ChequeDataTile";
+import useImagePicker from "../../../hooks/useImagePicker";
+import TextFieldErrorMessage from "../../../components/TextFieldErrorMessage";
+import {
+    cashReceiveValidation,
+    chequeAmountValidation,
+    chequeImageValidation,
+    chequeNumberValidation,
+    shopRequestValidation, userRemarkValidation
+} from "../../../validations/visit.validation";
 
 
-const Visit = ({}) => {
+const Visit = () => {
 
     const [requestData, setRequestData] = useState('');
     const [remarkData, setRemarkData] = useState('');
     const [cashData, setCashData] = useState('');
     const [chequeNumberData, setChequeNumberData] = useState('');
     const [chequeAmountData, setChequeAmountData] = useState('');
+    const [chequeListData, setChequeListData] = useState([]);
+
+    const [chequeNumberError, setChequeNumberError] = useState('');
+    const [chequeAmountError, setChequeAmountError] = useState('');
+    const [chequeImageError, setChequeImageError] = useState('');
+
+    const [requestDataError, setRequestDataError] = useState('');
+    const [userRemarkError, setUserRemarkError] = useState('');
+    const [cashAmountError, setCashAmountError] = useState('');
+
+    const {image, addImage, removeImage,} = useImagePicker();
 
     const closeIconColor = 'hsl(0 0% 74%)'
 
@@ -35,6 +55,7 @@ const Visit = ({}) => {
                         value={requestData}
                         placeholder={VisitScreenData.request.placeholder}
                         onChangeText={(text) => setRequestData(text)}
+                        errorMessage={requestDataError}
                     />
 
                     {/* Representative Remark Text Field */}
@@ -44,6 +65,7 @@ const Visit = ({}) => {
                         value={remarkData}
                         placeholder={VisitScreenData.remark.placeholder}
                         onChangeText={(text) => setRemarkData(text)}
+                        errorMessage={userRemarkError}
                     />
 
                 </View>
@@ -70,6 +92,7 @@ const Visit = ({}) => {
                                     console.log(cashData);
                                     console.log(typeof cashData);
                                 }}
+                                errorMessage={cashAmountError}
                             />
 
                             {/* Cheque Payments Details */}
@@ -86,16 +109,18 @@ const Visit = ({}) => {
                                         isHaveTitle={false}
                                         value={chequeNumberData}
                                         placeholder={VisitScreenData.receiving.chequeNumberPlaceholder}
-                                        keyboardType={"default"}
+                                        keyboardType={"number-pad"}
                                         onChangeText={(text) => {
-                                            setChequeNumberData(text);
+                                            setChequeNumberData(formatChequeNumberInput(text));
                                         }}
                                         flexIndex={2}
+                                        maxLength={11}
+                                        errorMessage={chequeNumberError}
                                     />
 
                                     <SingleLineTextField
                                         isHaveTitle={false}
-                                        value={chequeAmountData}
+                                        value={formatCurrencyInput(chequeAmountData)}
                                         placeholder={VisitScreenData.receiving.chequeAmountPlaceholder}
                                         keyboardType={"decimal-pad"}
                                         onChangeText={(text) => {
@@ -109,15 +134,51 @@ const Visit = ({}) => {
                                             setChequeAmountData(text);
                                         }}
                                         flexIndex={1}
+                                        errorMessage={chequeAmountError}
                                     />
                                 </View>
 
-                                <View
-                                    className={'mx-3 flex-1 bg-white/50 dark:bg-white/20 rounded-2xl h-24 justify-center items-center border-2 border-dashed border-gray-400 dark:border-white/40'}>
+                                <View className={''}>
 
-                                    <FontAwesome name={"camera"} color={"hsl(210 1% 53%)"} size={18}/>
+                                    {
+                                        (image)
+                                            ? <View className={'h-32 mx-3'}>
+                                                <Image
+                                                    source={{uri: image.uri}}
+                                                    style={{
+                                                        width: '100%',
+                                                        height: '100%',
+                                                        borderRadius: 12
+                                                    }}
+                                                    contentFit='fill'
+                                                />
+                                            </View>
 
-                                    <Text className={'mt-2 text-sm text-gray-400 dark:text-white/40'}>Add/Take Image</Text>
+                                            : <View className={'flex-row'}>
+                                                <Pressable
+                                                    onPress={() => addImage("camera")}
+                                                    className={'ml-3 mr-1 flex-1 bg-white/50 dark:bg-white/20 rounded-2xl h-24 justify-center items-center border-2 border-dashed border-gray-400 dark:border-white/40'}>
+
+                                                    <FontAwesome name={"camera"} color={"hsl(210 1% 53%)"} size={18}/>
+
+                                                    <Text className={'mt-2 text-sm text-gray-400 dark:text-white/40'}>Take Image</Text>
+
+                                                </Pressable>
+
+                                                <Pressable
+                                                    onPress={() => addImage("gallery")}
+                                                    className={'mr-3 ml-1 flex-1 bg-white/50 dark:bg-white/20 rounded-2xl h-24 justify-center items-center border-2 border-dashed border-gray-400 dark:border-white/40'}>
+
+                                                    <FontAwesome name={"image"} color={"hsl(210 1% 53%)"} size={18}/>
+
+                                                    <Text className={'mt-2 text-sm text-gray-400 dark:text-white/40'}>Add Image</Text>
+
+                                                </Pressable>
+                                            </View>
+
+                                    }
+
+                                    <TextFieldErrorMessage errorMessage={chequeImageError} marginBottom={'mb-2'}/>
 
                                 </View>
 
@@ -126,6 +187,47 @@ const Visit = ({}) => {
                                     <Pressable
                                         className="rounded-xl px-8 py-2 border border-primary/80 bg-primary/20"
                                         onPress={() => {
+
+                                            const chequeNumValidation = chequeNumberValidation(chequeNumberData);
+                                            if (!chequeNumValidation.status) {
+                                                setChequeNumberError(chequeNumValidation.error);
+                                                return;
+                                            }
+
+                                            setChequeNumberError('');
+
+
+                                            const chequeAmtValidation = chequeAmountValidation(chequeAmountData);
+                                            if (!chequeAmtValidation.status) {
+                                                setChequeAmountError(chequeAmtValidation.error);
+                                                return;
+                                            }
+
+                                            setChequeAmountError('');
+
+
+                                            const chequeImgValidation = chequeImageValidation(image);
+                                            if (!chequeImgValidation.status) {
+                                                setChequeImageError(chequeImgValidation.error);
+                                                return;
+                                            }
+
+                                            setChequeImageError('');
+
+
+                                            setChequeListData((current) => [
+                                                ...current,
+                                                {
+                                                    id: Date.now().toString(),
+                                                    chequeNumber: chequeNumberData,
+                                                    amount: chequeAmountData,
+                                                    image: image,
+                                                }
+                                            ]);
+
+                                            setChequeNumberData('');
+                                            setChequeAmountData('');
+                                            removeImage();
                                         }}
                                     >
                                         <Text className="text-foreground/60 font-medium">Add</Text>
@@ -139,26 +241,51 @@ const Visit = ({}) => {
                             <View className="h-px bg-border my-4"/>
 
                             {/* List of inserted cheque data */}
-                            <FlatList
-                                data={[2, 2]}
-                                scrollEnabled={false}
-                                style={{gap: 2}}
-                                renderItem={
-                                    (i) => {
-                                        return <ChequeDataTile chequeNumber={'2891813882918313'} amount={'10000'} iconColor={closeIconColor} onPress={() => {}} />
-                                    }
-                                }>
-                            </FlatList>
+                            <View className={'gap-0.5'}>
+                                {chequeListData.map((item) => (
+                                    <ChequeDataTile
+                                        key={item.id}
+                                        chequeNumber={item.chequeNumber}
+                                        amount={item.amount}
+                                        iconColor={closeIconColor}
+                                        imageUri={item.image.uri}
+                                        onPress={() => {
+                                            setChequeListData((current) =>
+                                                current.filter((cheque) => cheque.id !== item.id)
+                                            );
+                                        }}
+                                    />
+                                ))}
+                            </View>
 
                         </View>
 
                         <SubmitButton
                             text={"Complete Visit"}
                             onPress={() => {
-                                console.log("visit.jsx | SUBMIT PRESSED")
+                                const requestValidation = shopRequestValidation(chequeNumberData);
+                                if (!requestValidation.status) {
+                                    return setRequestDataError(requestValidation.error);
+                                }
+                                setRequestDataError('')
+
+                                const remarkValidation = userRemarkValidation(remarkData);
+                                if (!remarkValidation.status) {
+                                    return setUserRemarkError(remarkValidation.error);
+                                }
+                                setUserRemarkError('')
+
+                                const cashValidation = cashReceiveValidation(cashData);
+                                if (!cashValidation.status) {
+                                    return setCashAmountError(cashValidation.error);
+                                }
+                                setCashAmountError('')
+
+                                // TODO: send data, update progress, go to next page
+
+
                             }}
                         />
-
 
                     </View>
                 </SafeAreaView>
