@@ -66,7 +66,8 @@ export default function SignInScreen() {
                     <View className={'mt-6'}>
 
                         {/* Username Field */}
-                        <View className={'px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring'}>
+                        <View
+                            className={`${!emailError && 'mb-5'} px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring`}>
 
                             <FontAwesome name={'user'} size={18} style={{color: '#6B7280', paddingRight: 8}}/>
 
@@ -79,10 +80,11 @@ export default function SignInScreen() {
                                 keyboardType={"email-address"}
                             />
                         </View>
-                        <TextFieldErrorMessage errorMessage={emailError} marginBottom={'mb-5'}/>
+                        {emailError && <TextFieldErrorMessage errorMessage={emailError} marginBottom={'mb-5'}/>}
 
                         {/* Password Field */}
-                        <View className={'px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring'}>
+                        <View
+                            className={`${!emailError && 'mb-3'} px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring`}>
 
                             <FontAwesome name={'lock'} size={18} style={{color: '#6B7280', paddingRight: 8}}/>
 
@@ -110,7 +112,7 @@ export default function SignInScreen() {
                             </Pressable>
 
                         </View>
-                        <TextFieldErrorMessage errorMessage={passwordError} marginBottom={'mb-3'}/>
+                        {emailError && <TextFieldErrorMessage errorMessage={passwordError} marginBottom={'mb-3'}/>}
 
                         {/* Sign-In button */}
                         <Pressable
