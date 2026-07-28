@@ -3,10 +3,12 @@ import Visit from "./tabs/visit";
 import ScreenBackground from "../../components/ScreenBackground";
 import {useState} from "react";
 import Delivery from "./tabs/delivery";
-import {Stack} from "expo-router";
+import {Stack, useLocalSearchParams} from "expo-router";
 import {TabButton} from "../../components/TabButton";
 
 const Shop = () => {
+
+    const {shopName, shopId} = useLocalSearchParams();
 
     const [currentTab, setCurrentTab] = useState("visit");
 
@@ -16,7 +18,7 @@ const Shop = () => {
     return (
 
         <>
-            <Stack.Screen options={{title: "GenEX Mobile"}}/>
+            <Stack.Screen options={{title: shopName.toUpperCase()}}/>
 
             <ScreenBackground/>
 
