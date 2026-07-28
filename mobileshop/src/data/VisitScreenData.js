@@ -18,6 +18,7 @@ export const VisitScreenData = {
         cashPlaceholder: "Add amount",
         chequeDescription: "Enter the total of cheque Receiving details",
         chequeNumberPlaceholder: "Add cheque Number",
+        chequeNumberDescription: "Enter only first 10 digits [123456-7890]",
         chequeAmountPlaceholder: "Add amount",
         images: "Insert images of received cheques"
     }
