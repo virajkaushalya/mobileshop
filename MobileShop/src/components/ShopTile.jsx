@@ -3,15 +3,15 @@ import FontAwesome from "@react-native-vector-icons/fontawesome";
 import {router} from "expo-router";
 import {formatMobileNumber} from "../ulitily/inputFormatter";
 
-const ShopTile = ({shopName, address, mobileNumber}) => {
+const ShopTile = ({shop}) => {
 
     const colorScheme = useColorScheme();
     const isDark = colorScheme === "dark";
     const iconColor = isDark ? "hsl(213 30% 70%)" : "hsl(219 12% 32%)";
 
-    const processedAddress = !address
+    const processedAddress = !shop.address
         ? "Unknown Address"
-        : address.split(",").map(s => s.trim()).join(", \n");
+        : shop.address.split(",").map(s => s.trim()).join(", \n");
 
 
     return (
@@ -21,12 +21,12 @@ const ShopTile = ({shopName, address, mobileNumber}) => {
                 () => {
                     // TODO
                     console.log('Press');
-                    router.push("/(views)/shop");
+                    router.push({pathname: "/(views)/shop", params: {shopName: shop.shopName, shopId: shop.shopId}});
                 }
             }
         >
             <View className={'flex-1 flex-col'}>
-                <Text className={'text-foreground text-2xl uppercase mb-2'}>{shopName}</Text>
+                <Text className={'text-foreground text-2xl uppercase mb-2'}>{shop.shopName}</Text>
                 <View className={'flex-row justify-between'}>
                     <View className="flex-1 h-16 justify-end">
                         <Text
@@ -38,10 +38,10 @@ const ShopTile = ({shopName, address, mobileNumber}) => {
                         </Text>
                     </View>
 
-                    {mobileNumber && (
+                    {shop.mobileNumber && (
                         <View className={'justify-end align-bottom h-max pr-8 ml-4'}>
                             <Text className={'text-foreground/60 w-max text-right text-sm font-semibold'}>:Mobile</Text>
-                            <Text className={'text-foreground/60 w-max text-right text-sm'}>{formatMobileNumber(mobileNumber)}</Text>
+                            <Text className={'text-foreground/60 w-max text-right text-sm'}>{formatMobileNumber(shop.mobileNumber)}</Text>
                         </View>
                     )}
 

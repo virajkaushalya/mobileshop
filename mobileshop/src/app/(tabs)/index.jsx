@@ -8,8 +8,6 @@ import {useShops} from "../../hooks/useShops";
 
 const Index = () => {
 
-    // const [progress, setProgress] = useState(0.4);
-
     const {shops, loading, progress} = useShops();
 
     const currentDate = new Date().toDateString();
@@ -61,11 +59,7 @@ const Index = () => {
                 contentContainerClassName={'gap-2 pb-4'}
                 renderItem={
                     ({item}) => (
-                        <ShopTile
-                            shopName={item.shopName}
-                            address={item.address}
-                            mobileNumber={item.contactNumber}
-                        />
+                        <ShopTile shop={item}/>
                     )}
             />
 
