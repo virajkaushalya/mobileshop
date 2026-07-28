@@ -6,7 +6,8 @@ const ChequeDataTile = ({
                             iconColor,
                             chequeNumber = '0',
                             amount = '0',
-                            onPress
+                            onPress,
+                            imageUri
                         }) => {
     return (
         <View
@@ -34,12 +35,13 @@ const ChequeDataTile = ({
             </View>
 
             <Image
-                source={require('../../assets/temp/temp_img.png')}
+                source={{uri: imageUri}}
                 style={{
-                    width: 48,
+                    width: 52,
                     height: 64,
                     borderRadius: 12,
-                }}/>
+                }}
+            />
 
         </View>
     );
