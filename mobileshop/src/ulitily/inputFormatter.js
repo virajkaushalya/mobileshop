@@ -12,6 +12,22 @@ export const formatCurrencyInput = (value) => {
         : integerPart;
 };
 
+
+export const formatChequeNumberInput = (value) => {
+    // Keep only digits
+    const digits = value.replace(/\D/g, '');
+
+    if (!digits) return '';
+
+    const chequeNumber = digits.slice(0, 6);
+    const bankNumber = digits.slice(6);
+
+    return bankNumber
+        ? `${chequeNumber}-${bankNumber}`
+        : chequeNumber;
+};
+
+
 export const formatCurrency = (amount = 0) => (
     `Rs. ${Number(amount).toLocaleString("en-LK", {
         minimumFractionDigits: 2,
