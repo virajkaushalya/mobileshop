@@ -261,7 +261,10 @@ const Visit = () => {
                         </View>
 
                         <SubmitButton
-                            text={"Complete Visit"}
+                            text={"Continue"}
+                            isContinue={true}
+                            backgroundOpacity={30}
+                            borderRadius={'full'}
                             onPress={() => {
                                 const requestValidation = shopRequestValidation(requestData);
                                 if (!requestValidation.status) {
