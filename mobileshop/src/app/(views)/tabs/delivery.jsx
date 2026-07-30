@@ -4,10 +4,14 @@ import {Checkbox, Host} from "@expo/ui";
 import {useState} from "react";
 import SubmitButton from "../../../components/SubmitButton";
 import Device from "../../../model/Device";
+import TextFieldErrorMessage from "../../../components/TextFieldErrorMessage";
+import {deliveryValidation} from "../../../validations/delivery.validation";
 
 const Delivery = () => {
 
     const iconColour = "hsl(221 21% 31%)"
+
+    const [errorMessage, setErrorMessage] = useState("");
 
     const [devices, setDevices] = useState([
         new Device("D001", "iPhone 16 Pro", 8, 5, false),
@@ -95,10 +99,21 @@ const Delivery = () => {
                 }}
             />
 
+            <View className={'pl-3'}>
+                <TextFieldErrorMessage errorMessage={errorMessage} marginBottom={'mb-1'}/>
+            </View>
             <SubmitButton
                 text={"Complete Delivery"}
+                marginTop={'mt-1'}
                 onPress={() => {
-                    console.log("delivery.jsx | SUBMIT PRESSED")
+
+                    if (!deliveryValidation(devices)) {
+                        setErrorMessage("Please complete all deliveries");
+                    }
+
+                    setErrorMessage('');
+                    console.log("delivery.jsx | VALID SUBMIT")
+
                 }}
             />
 
