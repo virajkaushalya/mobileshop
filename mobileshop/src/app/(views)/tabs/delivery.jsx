@@ -2,7 +2,6 @@ import {FlatList, Text, View} from "react-native";
 import FontAwesome from "@react-native-vector-icons/fontawesome";
 import {Checkbox, Host} from "@expo/ui";
 import {useState} from "react";
-import {SafeAreaView} from "react-native-safe-area-context";
 import SubmitButton from "../../../components/SubmitButton";
 import Device from "../../../model/Device";
 
@@ -28,8 +27,8 @@ const Delivery = () => {
     const toggleCheckbox = (id) => {
         setDevices((prev) =>
             prev.map((item) =>
-                item.id === id
-                    ? {...item, checked: !item.checked}
+                item.deviceId === id
+                    ? {...item, checked: !item.isDelivered}
                     : item
             )
         );
