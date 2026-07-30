@@ -4,24 +4,25 @@ import {Checkbox, Host} from "@expo/ui";
 import {useState} from "react";
 import {SafeAreaView} from "react-native-safe-area-context";
 import SubmitButton from "../../../components/SubmitButton";
+import Device from "../../../model/Device";
 
 const Delivery = () => {
 
     const iconColour = "hsl(221 21% 31%)"
 
     const [devices, setDevices] = useState([
-        {id: "1", name: "iPhone 14", requested: 6, issuing: 4, checked: false},
-        {id: "2", name: "iPhone 13", requested: 3, issuing: 2, checked: false},
-        {id: "3", name: "Samsung S23", requested: 1, issuing: 1, checked: false},
-        {id: "4", name: "iPhone 14", requested: 6, issuing: 4, checked: false},
-        {id: "5", name: "iPhone 13", requested: 3, issuing: 2, checked: false},
-        {id: "6", name: "Samsung S23", requested: 1, issuing: 1, checked: false},
-        {id: "7", name: "iPhone 14", requested: 6, issuing: 4, checked: false},
-        {id: "8", name: "iPhone 13", requested: 3, issuing: 2, checked: false},
-        {id: "9", name: "Samsung S23", requested: 1, issuing: 1, checked: false},
-        {id: "10", name: "iPhone 14", requested: 6, issuing: 4, checked: false},
-        {id: "11", name: "iPhone 13", requested: 3, issuing: 2, checked: false},
-        {id: "12", name: "Samsung S23", requested: 1, issuing: 1, checked: false},
+        new Device("D001", "iPhone 16 Pro", 8, 5, false),
+        new Device("D002", "iPhone 15", 6, 6, true),
+        new Device("D003", "Samsung Galaxy S24", 10, 7, false),
+        new Device("D004", "Google Pixel 9", 4, 4, true),
+        new Device("D005", "OnePlus 12", 5, 3, false),
+        new Device("D006", "Xiaomi 14", 9, 8, false),
+        new Device("D007", "Nothing Phone (3)", 2, 2, true),
+        new Device("D008", "Sony Xperia 1 VI", 3, 1, false),
+        new Device("D009", "Motorola Edge 50 Pro", 7, 5, false),
+        new Device("D010", "OPPO Find X8", 6, 6, true),
+        new Device("D011", "Vivo X200", 5, 2, false),
+        new Device("D012", "Huawei Pura 70 Pro", 4, 4, true),
     ]);
 
     const toggleCheckbox = (id) => {
@@ -62,11 +63,11 @@ const Delivery = () => {
                             <View className="flex-1 ml-4">
 
                                 <Text className="text-xl font-semibold text-foreground">
-                                    {item.name}
+                                    {item.deviceName}
                                 </Text>
 
                                 <Text className="text-sm text-foreground/60 mt-1">
-                                    Requested {item.requested} devices
+                                    Requested {item.requestedCnt} devices
                                 </Text>
 
                             </View>
@@ -74,7 +75,7 @@ const Delivery = () => {
                             <View className="items-center mr-4">
 
                                 <Text className="text-4xl font-bold text-primary">
-                                    {item.issuing}
+                                    {item.issuingCnt}
                                 </Text>
 
                                 <Text className="text-xs text-foreground/50 mt-1">
@@ -85,7 +86,7 @@ const Delivery = () => {
 
                             <Host matchContents>
                                 <Checkbox
-                                    value={item.checked}
+                                    value={item.isDelivered}
                                     onValueChange={() => toggleCheckbox(item.id)}
                                 />
                             </Host>
