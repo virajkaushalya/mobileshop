@@ -263,7 +263,7 @@ const Visit = () => {
                         <SubmitButton
                             text={"Complete Visit"}
                             onPress={() => {
-                                const requestValidation = shopRequestValidation(chequeNumberData);
+                                const requestValidation = shopRequestValidation(requestData);
                                 if (!requestValidation.status) {
                                     return setRequestDataError(requestValidation.error);
                                 }
