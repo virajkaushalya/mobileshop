@@ -25,10 +25,10 @@ const Delivery = () => {
     ]);
 
     const toggleCheckbox = (id) => {
-        setDevices((prev) =>
-            prev.map((item) =>
+        setDevices(prev =>
+            prev.map(item =>
                 item.deviceId === id
-                    ? {...item, checked: !item.isDelivered}
+                    ? {...item, isDelivered: !item.isDelivered}
                     : item
             )
         );
@@ -45,7 +45,7 @@ const Delivery = () => {
                 showsVerticalScrollIndicator={false}
                 className="flex-1 mt-6"
                 data={devices}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.deviceId}
                 renderItem={({item}) => {
 
                     return (
@@ -86,7 +86,7 @@ const Delivery = () => {
                             <Host matchContents>
                                 <Checkbox
                                     value={item.isDelivered}
-                                    onValueChange={() => toggleCheckbox(item.id)}
+                                    onValueChange={() => toggleCheckbox(item.deviceId)}
                                 />
                             </Host>
 
