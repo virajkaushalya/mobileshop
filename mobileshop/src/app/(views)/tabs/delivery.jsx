@@ -109,11 +109,11 @@ const Delivery = () => {
 
                     if (!deliveryValidation(devices)) {
                         setErrorMessage("Please complete all deliveries");
+                        return;
                     }
 
                     setErrorMessage('');
-                    console.log("delivery.jsx | VALID SUBMIT")
-
+                    console.log("delivery.jsx | SUBMIT PRESSED")
                 }}
             />
 
