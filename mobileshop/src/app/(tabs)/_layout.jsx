@@ -27,6 +27,14 @@ export default function TabsLayout() {
                 <NativeTabs.Trigger.Label>Report</NativeTabs.Trigger.Label>
             </NativeTabs.Trigger>
 
+            <NativeTabs.Trigger name="profile">
+                <NativeTabs.Trigger.Icon sf={{
+                    default: "brain.head.profile",
+                    selected: "headset.circle"
+                }} md="account_circle"/>
+                <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
+            </NativeTabs.Trigger>
+
         </NativeTabs>
     );
 }
