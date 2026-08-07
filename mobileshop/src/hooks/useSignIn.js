@@ -11,8 +11,6 @@ export function useSignIn() {
 
     const signIn = async (username, password) => {
 
-        console.log("HOHOHOHOHOHOHOHOHO")
-
         setSigningIn(true);
 
         const {validationStatus: usernameValid, errorMessage: usernameMessage} = usernameValidation(username);
