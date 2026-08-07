@@ -5,11 +5,12 @@ export const loginApi = async (username, password) => {
     const response = await apiClient.post(
         '',
         {
-            "request_type": "userLogin",
-            "username": username,
-            "password": password
+            request_type:"userLogin",
+            username,
+            password
         }
     );
 
-    return response;
-}
+
+    return response.data;
+};
