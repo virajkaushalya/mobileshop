@@ -9,12 +9,12 @@ import {useSignIn} from "../../hooks/useSignIn";
 
 export default function SignInScreen() {
 
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const [isPasswordVisible, setPasswordVisible] = useState(false);
 
-    const {signIn, emailError, passwordError, isSigningIn} = useSignIn();
+    const {signIn, usernameError, passwordError, isSigningIn} = useSignIn();
 
     const colourScheme = useColorScheme();
     const placeholderColour = colourScheme === "dark" ? "hsl(210 40% 96%)" : "hsl(222 47% 11%)";
@@ -67,24 +67,24 @@ export default function SignInScreen() {
 
                         {/* Username Field */}
                         <View
-                            className={`${!emailError && 'mb-5'} px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring`}>
+                            className={`${!usernameError && 'mb-5'} px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring`}>
 
                             <FontAwesome name={'user'} size={18} style={{color: '#6B7280', paddingRight: 8}}/>
 
                             <TextInput
-                                value={email}
-                                onChangeText={(text) => setEmail(text)}
-                                placeholder={'Email Address'}
+                                value={username}
+                                onChangeText={(text) => setUsername(text)}
+                                placeholder={'Username'}
                                 placeholderTextColor={placeholderColour}
                                 className={'flex-1 text-foreground'}
-                                keyboardType={"email-address"}
+                                keyboardType={"default"}
                             />
                         </View>
-                        {emailError && <TextFieldErrorMessage errorMessage={emailError} marginBottom={'mb-5'}/>}
+                        {usernameError && <TextFieldErrorMessage errorMessage={usernameError} marginBottom={'mb-5'}/>}
 
                         {/* Password Field */}
                         <View
-                            className={`${!emailError && 'mb-3'} px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring`}>
+                            className={`${!usernameError && 'mb-3'} px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring`}>
 
                             <FontAwesome name={'lock'} size={18} style={{color: '#6B7280', paddingRight: 8}}/>
 
@@ -112,13 +112,13 @@ export default function SignInScreen() {
                             </Pressable>
 
                         </View>
-                        {emailError && <TextFieldErrorMessage errorMessage={passwordError} marginBottom={'mb-3'}/>}
+                        {passwordError && <TextFieldErrorMessage errorMessage={passwordError} marginBottom={'mb-3'}/>}
 
                         {/* Sign-In button */}
                         <Pressable
                             className={`mt-6 px-4 py-3 flex-row items-center justify-center rounded-2xl border border-border bg-primary/80 ${isSigningIn ? 'bg-white/40' : ''} `}
                             disabled={isSigningIn}
-                            onPress={() => signIn(email, password)}
+                            onPress={() => signIn(username, password)}
                         >
                             <Text className={'text-foreground'}>
                                 {isSigningIn ? SignInScreenData.signingIn : SignInScreenData.submitBtn}
