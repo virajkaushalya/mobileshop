@@ -68,8 +68,11 @@ export function usernameValidation(username) {
 
 export function passwordValidation(password) {
 
-    // TODO: Remove below line
-    return true;
+    // TODO: Remove below return section
+    return {
+        validationStatus: true,
+        errorMessage: "",
+    }; // To here | remove
 
     if (!password) {
         return {
