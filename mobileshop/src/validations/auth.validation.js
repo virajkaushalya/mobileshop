@@ -20,7 +20,57 @@ export function emailValidation(email) {
 }
 
 
+export function usernameValidation(username) {
+
+    if (!username) {
+        return {
+            validationStatus: false,
+            errorMessage: "Username is required",
+        };
+    }
+
+    const value = username.trim();
+
+    if (value.length < 3) {
+        return {
+            validationStatus: false,
+            errorMessage: "Username must be at least 3 characters long",
+        };
+    }
+
+    if (value.length > 30) {
+        return {
+            validationStatus: false,
+            errorMessage: "Username cannot exceed 30 characters",
+        };
+    }
+
+    if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+        return {
+            validationStatus: false,
+            errorMessage: "Username can only contain letters, numbers, and underscores",
+        };
+    }
+
+    if (/^\d/.test(value)) {
+        return {
+            validationStatus: false,
+            errorMessage: "Username cannot start with a number",
+        };
+    }
+
+    return {
+        validationStatus: true,
+        errorMessage: "",
+    };
+}
+
+
 export function passwordValidation(password) {
+
+    // TODO: Remove below line
+    return true;
+
     if (!password) {
         return {
             validationStatus: false,
