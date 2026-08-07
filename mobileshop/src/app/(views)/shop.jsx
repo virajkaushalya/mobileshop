@@ -42,7 +42,7 @@ const Shop = () => {
             </View>
 
             <View className={'flex-1'}>
-                {currentTab === "visit" && <Visit/>}
+                {currentTab === "visit" && <Visit onContinue={() => setCurrentTab("delivery")}/>}
                 {currentTab === "delivery" && <Delivery/>}
             </View>
 

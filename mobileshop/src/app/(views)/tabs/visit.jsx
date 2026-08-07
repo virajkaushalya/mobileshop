@@ -21,7 +21,7 @@ import {
 } from "../../../validations/visit.validation";
 
 
-const Visit = () => {
+const Visit = ({onContinue}) => {
 
     const [requestData, setRequestData] = useState('');
     const [remarkData, setRemarkData] = useState('');
@@ -285,7 +285,7 @@ const Visit = () => {
                                 setCashAmountError('')
 
                                 // TODO: send data, update progress, go to next page
-
+                                onContinue();
 
                             }}
                         />
