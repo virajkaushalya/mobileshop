@@ -20,9 +20,9 @@ jobs:
 
       - name: Install dependencies
         working-directory: mobileshop
-        run: npm ci
+        run: cd mobileshop && npm ci
 
-      - run: npm run lint
+      - run: cd mobileshop && npm run lint
 
       # Uncomment if have tests
       # - run: npm test
