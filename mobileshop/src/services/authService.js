@@ -1,6 +1,6 @@
 import {loginApi} from "../api/authApi";
+import {saveToken} from "./authStoreService";
 
-let jwtToken = null;
 
 export async function authService({username, password}) {
 
@@ -10,7 +10,9 @@ export async function authService({username, password}) {
 
         if (response.status === 1 && response.message === "success") {
 
-            jwtToken = response.data.token;
+            const jwtToken = response.data.token;
+            await saveToken(jwtToken);
+
             return {
                 success: true,
                 token: jwtToken
