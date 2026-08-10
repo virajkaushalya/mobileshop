@@ -14,3 +14,18 @@ export const loginApi = async (username, password) => {
 
     return response.data;
 };
+
+export const changePasswordApi = async (oldPassword, newPassword) => {
+
+    const response = await  apiClient.post(
+        '',
+        {
+            request_type:"changePassword",
+            oldPassword,
+            newPassword
+        }
+    );
+
+    return response.data;
+
+}
