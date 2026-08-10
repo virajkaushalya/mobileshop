@@ -13,7 +13,7 @@ const Profile = () => {
 
                     <Text className={'text-foreground/80 text-3xl font-semibold'}>Profile Settings</Text>
 
-                    // TODO
+                    {/*TODO*/}
 
                 </SafeAreaView>
             </View>
