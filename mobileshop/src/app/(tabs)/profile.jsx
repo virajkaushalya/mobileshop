@@ -9,9 +9,9 @@ const Profile = () => {
         <View className={''}>
 
             <View className={'bg-secondary pb-8 rounded-b-[30px]'}>
-                <SafeAreaView className={''}>
+                <SafeAreaView className={'pl-8 pt-6'}>
 
-                    <Text className={'text-foreground'}>Hello</Text>
+                    <Text className={'text-foreground/80 text-3xl font-semibold'}>Profile Settings</Text>
 
 
 
