@@ -1,12 +1,13 @@
 import {useState} from "react";
 import {passwordValidation, usernameValidation} from "../validations/auth.validation";
-import {authService} from "../services/authService";
-import {router} from "expo-router";
+import {useAuth} from "../context/AuthContext";
 
 export function useSignIn() {
     const [usernameError, setUsernameError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [isSigningIn, setSigningIn] = useState(false);
+
+    const {login} = useAuth();
 
 
     const signIn = async (username, password) => {
@@ -32,14 +33,10 @@ export function useSignIn() {
 
 
         // API login here
-        // await authService.login(username,password)
-        const result = await authService({username: username, password: password});
+        // Login through AuthContext
+        const result = await login(username, password);
 
-        if (result.success === true) {
-            router.replace('../(tabs)');
-        } else {
-            setUsernameError('Username or Password is Incorrect');
-        }
+        if (!result.success) setUsernameError("Username or Password is Incorrect");
 
         setSigningIn(false);
 

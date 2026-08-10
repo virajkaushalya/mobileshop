@@ -1,5 +1,5 @@
-import {loginApi} from "../api/authApi";
-import {saveToken} from "./authStoreService";
+import {loginApi, validateTokenApi} from "../api/authApi";
+import {getToken, removeToken, saveToken} from "./authStoreService";
 
 
 export async function authService({username, password}) {
@@ -32,4 +32,51 @@ export async function authService({username, password}) {
             message: "Something went wrong"
         };
     }
+}
+
+
+export async function restoreAuth() {
+
+    try {
+
+        const token = await getToken();
+
+        if (!token) {
+            return {
+                authenticated: false
+            };
+        }
+
+        // Ask backend whether JWT is still valid
+        const response = await validateTokenApi();
+
+        if (response.status === 1) {
+
+            return {
+                authenticated: true,
+                token
+            };
+        }
+
+        await removeToken();
+
+        return {
+            authenticated: false
+        };
+
+    } catch (error) {
+
+        console.log("restoreAuth()", error.message);
+
+        await removeToken();
+
+        return {
+            authenticated: false
+        };
+    }
+}
+
+
+export async function logout() {
+    await removeToken();
 }

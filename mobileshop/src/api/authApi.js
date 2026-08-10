@@ -15,6 +15,7 @@ export const loginApi = async (username, password) => {
     return response.data;
 };
 
+
 export const changePasswordApi = async (oldPassword, newPassword) => {
 
     const response = await  apiClient.post(
@@ -29,3 +30,16 @@ export const changePasswordApi = async (oldPassword, newPassword) => {
     return response.data;
 
 }
+
+
+export const validateTokenApi = async () => {
+
+    const response = await apiClient.post(
+        '',
+        {
+            request_type: "validateToken"
+        }
+    );
+
+    return response.data;
+};
