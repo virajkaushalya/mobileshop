@@ -1,10 +1,11 @@
 import {Pressable, Text, View} from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
-import SingleLineTextField from "../../components/SingleLineTextField";
 import {useState} from "react";
+import {Stack} from "expo-router";
+
+import PasswordTextField from "../../components/PasswordTextField";
 import TitleDescriptionTile from "../../components/TitleDescriptionTile";
 import ScreenBackground from "../../components/ScreenBackground";
-import {Stack} from "expo-router";
 import {useChangePassword} from "../../hooks/useChangePassword";
 
 const ChangePassword = () => {
@@ -13,75 +14,84 @@ const ChangePassword = () => {
     const [newPass, setNewPass] = useState("");
     const [reNewPass, setReNewPass] = useState("");
 
-    const {changePassword, oldPassError, newPassError, reNewPassError, isProcessing} = useChangePassword();
+    const {
+        changePassword,
+        oldPassError,
+        newPassError,
+        reNewPassError,
+        isProcessing,
+    } = useChangePassword();
 
     return (
-        <View className={'flex-1'}>
+        <View className="flex-1">
 
-            <Stack.Screen options={{title: 'Change Password'.toUpperCase()}}/>
+            <Stack.Screen
+                options={{
+                    title: "CHANGE PASSWORD",
+                }}
+            />
 
             <ScreenBackground/>
 
-            <SafeAreaView className={'flex-1'}>
 
-                <View className={'flex-1'}/>
+            <SafeAreaView className="flex-1">
 
-                <TitleDescriptionTile
-                    className={'ml-5 mb-4'}
-                    title={'Change Your Password'}
-                    description={'Make sure a new password needs at least one capital letter, simple letter, number and a special character. Minimum length should be 8 characters'}
-                />
+                <View className="px-5 pt-4">
 
-                <View className={'flex-1 mx-2'}>
+                    <TitleDescriptionTile
+                        title="Change Your Password"
+                        description="Make sure a new password needs at least one capital letter, simple letter, number and a special character. Minimum length should be 8 characters"
+                    />
 
-                    <SingleLineTextField
-                        isHaveTitle={false}
+                </View>
+
+                <View className="mt-6 px-2">
+
+                    <PasswordTextField
                         value={oldPass}
-                        placeholder={'Enter Old Password'}
-                        editable={true}
-                        keyboardType="password"
-                        secureTextEntry={true}
-                        onChangeText={(value) => setOldPass(value)}
+                        placeholder="Enter Old Password"
+                        onChangeText={setOldPass}
                         errorMessage={oldPassError}
                     />
 
-                    <SingleLineTextField
-                        isHaveTitle={false}
+                    <PasswordTextField
                         value={newPass}
-                        placeholder={'Enter New Password'}
-                        editable={true}
-                        keyboardType="password"
-                        secureTextEntry={true}
-                        onChangeText={(value) => setNewPass(value)}
+                        placeholder="Enter New Password"
+                        onChangeText={setNewPass}
                         errorMessage={newPassError}
                     />
 
-                    <SingleLineTextField
-                        isHaveTitle={false}
+                    <PasswordTextField
                         value={reNewPass}
-                        placeholder={'Re-enter New Password'}
-                        editable={true}
-                        keyboardType="password"
-                        secureTextEntry={true}
-                        onChangeText={(value) => setReNewPass(value)}
+                        placeholder="Re-enter New Password"
+                        onChangeText={setReNewPass}
                         errorMessage={reNewPassError}
                     />
 
                     <Pressable
-                        className={'bg-primary/30 justify-center items-center py-2.5 mx-4 mt-4 rounded-full border border-primary/60'}
+                        className="mx-4 mt-1 items-center justify-center rounded-full border border-primary/60 bg-primary/30 py-2.5"
                         disabled={isProcessing}
-                        onPress={() => changePassword(oldPass, newPass, reNewPass)}
+                        onPress={() =>
+                            changePassword(
+                                oldPass,
+                                newPass,
+                                reNewPass
+                            )
+                        }
                     >
-                        <Text className={'text-foreground'}>{(isProcessing) ? 'Password Change in progress...' : 'Change Password'}</Text>
+                        <Text className="text-foreground">
+                            {isProcessing
+                                ? "Password Change in progress..."
+                                : "Change Password"}
+                        </Text>
                     </Pressable>
 
                 </View>
 
-                <View className={'flex-1'}/>
-
             </SafeAreaView>
+
         </View>
     );
-}
+};
 
 export default ChangePassword;
