@@ -25,7 +25,6 @@ const Profile = () => {
             </View>
 
             <View className={'flex-1 px-4 pt-8'}>
-                <SafeAreaView className={'flex-1'} edges={['']}>
 
                     {/* Profile settings tile */}
                     <Pressable
@@ -49,7 +48,6 @@ const Profile = () => {
                         <FontAwesome name={'sign-out'} size={22} color={'red'}/>
                     </Pressable>
 
-                </SafeAreaView>
             </View>
 
         </View>
