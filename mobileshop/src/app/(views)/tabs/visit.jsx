@@ -264,6 +264,7 @@ const Visit = ({onContinue}) => {
                             text={"Continue"}
                             isContinue={true}
                             backgroundOpacity={30}
+                            paddingY={'py-2'}
                             borderRadius={'full'}
                             onPress={() => {
                                 const requestValidation = shopRequestValidation(requestData);
