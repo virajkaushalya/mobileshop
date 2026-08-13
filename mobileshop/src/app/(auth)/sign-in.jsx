@@ -9,130 +9,180 @@ import {useSignIn} from "../../hooks/useSignIn";
 
 export default function SignInScreen() {
 
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     const [isPasswordVisible, setPasswordVisible] = useState(false);
 
-    const {signIn, emailError, passwordError, isSigningIn} = useSignIn();
+    const {signIn, usernameError, passwordError, isSigningIn} = useSignIn();
 
     const colourScheme = useColorScheme();
     const placeholderColour = colourScheme === "dark" ? "hsl(210 40% 96%)" : "hsl(222 47% 11%)";
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <SafeAreaView className={'flex-1 bg-primary dark:bg-secondary'} edges={["top"]}>
+            <SafeAreaView
+                className="flex-1 bg-primary dark:bg-secondary"
+                edges={["top"]}
+            >
+                <View className="flex-1">
 
-                {/* Decorative Elements */}
-                <View className={'absolute -left-16 top-12 h-56 w-56 rounded-full bg-primary/80 dark:bg-background/40'}/>
-                <View className={'absolute right-[-74px] top-40 h-72 w-72 rounded-full bg-primary/70 dark:bg-background/35'}/>
+                    {/* Decorative Elements */}
+                    <View className="absolute -left-16 top-12 h-56 w-56 rounded-full bg-primary/80 dark:bg-background/40"/>
+                    <View className="absolute right-[-74px] top-40 h-72 w-72 rounded-full bg-primary/70 dark:bg-background/35"/>
 
-                {/* Header Area */}
-                <View className={'px-6 pt-4'}>
+                    {/* Header */}
+                    <View className="flex-1 px-6 pt-4">
 
-                    {/* App Title Area */}
-                    <Text
-                        className={'text-center text-5xl font-normal tracking-normal text-primary-foreground dark:text-foreground/60 uppercase'}>
-                        {SignInScreenData.appName}
-                    </Text>
-                    <Text className={'mt-1 text-center text-sm text-primary-foreground/80 dark:text-foreground/75'}>
-                        {SignInScreenData.subTitle}
-                    </Text>
-
-                    {/* Image Area */}
-                    <View className={'mt-6 rounded-[30px] border border-white/20 bg-white/10 p-3'}>
-                        <Image
-                            source={require('../../../assets/images/auth/auth.png')}
-                            style={{width: "100%", height: 350}}
-                            contentFit={"contain"}
-                        />
-                    </View>
-
-                </View>
-
-
-                <View className={'mt-8 flex-1 rounded-t-[30px] bg-card px-6 pb-8 pt-6'}>
-
-                    <View className={'self-center rounded-full bg-secondary px-3 py-1'}>
-                        <Text className={'text-xs font-semibold uppercase tracking-wide text-secondary-foreground'}>
-                            {SignInScreenData.welcome}
+                        <Text
+                            className="text-center text-5xl font-normal tracking-normal text-primary-foreground dark:text-foreground/60 uppercase">
+                            {SignInScreenData.appName}
                         </Text>
-                    </View>
 
-                    <Text className={'mt-2 text-center text-sm leading-6 text-muted-foreground'}>
-                        {SignInScreenData.loginDescription}
-                    </Text>
+                        <Text className="mt-1 text-center text-sm text-primary-foreground/80 dark:text-foreground/75">
+                            {SignInScreenData.subTitle}
+                        </Text>
 
-                    <View className={'mt-6'}>
-
-                        {/* Username Field */}
-                        <View
-                            className={`${!emailError && 'mb-5'} px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring`}>
-
-                            <FontAwesome name={'user'} size={18} style={{color: '#6B7280', paddingRight: 8}}/>
-
-                            <TextInput
-                                value={email}
-                                onChangeText={(text) => setEmail(text)}
-                                placeholder={'Email Address'}
-                                placeholderTextColor={placeholderColour}
-                                className={'flex-1 text-foreground'}
-                                keyboardType={"email-address"}
-                            />
-                        </View>
-                        {emailError && <TextFieldErrorMessage errorMessage={emailError} marginBottom={'mb-5'}/>}
-
-                        {/* Password Field */}
-                        <View
-                            className={`${!emailError && 'mb-3'} px-4 flex-row items-center rounded-2xl border border-border bg-card focus:border-ring`}>
-
-                            <FontAwesome name={'lock'} size={18} style={{color: '#6B7280', paddingRight: 8}}/>
-
-                            <TextInput
-                                value={password}
-                                onChangeText={(text) => {
-                                    setPassword(text);
+                        {/* Image takes the remaining available space */}
+                        <View className="mt-6 min-h-0 flex-1 rounded-[30px] border border-white/20 bg-white/10 p-3">
+                            <Image
+                                source={require('../../../assets/images/auth/auth.png')}
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
                                 }}
-                                placeholder={'Password'}
-                                placeholderTextColor={placeholderColour}
-                                className={'flex-1 text-foreground'}
-                                secureTextEntry={!isPasswordVisible}
+                                contentFit="contain"
                             />
-
-                            {/* Password hide/unhide button*/}
-                            <Pressable
-                                onPressIn={() => setPasswordVisible(!isPasswordVisible)}
-                                onPressOut={() => setPasswordVisible(!isPasswordVisible)}
-                            >
-                                <FontAwesome
-                                    name={isPasswordVisible ? "eye-slash" : "eye"}
-                                    size={18}
-                                    style={{color: 'rgb(75 85 99 / 0.74)', paddingRight: 8}}
-                                />
-                            </Pressable>
-
                         </View>
-                        {emailError && <TextFieldErrorMessage errorMessage={passwordError} marginBottom={'mb-3'}/>}
-
-                        {/* Sign-In button */}
-                        <Pressable
-                            className={`mt-6 px-4 py-3 flex-row items-center justify-center rounded-2xl border border-border bg-primary/80 ${isSigningIn ? 'bg-white/40' : ''} `}
-                            disabled={isSigningIn}
-                            onPress={() => signIn(email, password)}
-                        >
-                            <Text className={'text-foreground'}>
-                                {isSigningIn ? SignInScreenData.signingIn : SignInScreenData.submitBtn}
-                            </Text>
-                        </Pressable>
 
                     </View>
 
-                    <Text className={'mt-3 text-center text-sm leading-5 text-muted-foreground'}>
-                        {SignInScreenData.TnC}
-                    </Text>
+                    {/* Login Card */}
+                    <View className="rounded-t-[30px] bg-card px-6 pb-3 pt-6 mt-2">
+
+                        <SafeAreaView edges={['bottom']}>
+
+                            <View className="self-center rounded-full bg-secondary px-3 py-1">
+                                <Text className="text-xs font-semibold uppercase tracking-wide text-secondary-foreground">
+                                    {SignInScreenData.welcome}
+                                </Text>
+                            </View>
+
+                            <Text className="mt-2 text-center text-sm leading-6 text-muted-foreground">
+                                {SignInScreenData.loginDescription}
+                            </Text>
+
+                            <View className="mt-6">
+
+                                {/* Username */}
+                                <View
+                                    className={`${
+                                        !usernameError ? "mb-5" : ""
+                                    } flex-row items-center rounded-2xl border border-border bg-card px-4`}
+                                >
+                                    <FontAwesome
+                                        name="user"
+                                        size={18}
+                                        style={{
+                                            color: "#6B7280",
+                                            paddingRight: 8,
+                                        }}
+                                    />
+
+                                    <TextInput
+                                        value={username}
+                                        onChangeText={setUsername}
+                                        placeholder="Username"
+                                        placeholderTextColor={placeholderColour}
+                                        className="flex-1 text-foreground"
+                                    />
+                                </View>
+
+                                {usernameError && (
+                                    <TextFieldErrorMessage
+                                        errorMessage={usernameError}
+                                        marginBottom="mb-5"
+                                    />
+                                )}
+
+                                {/* Password */}
+                                <View
+                                    className={`${
+                                        !usernameError ? "mb-3" : ""
+                                    } flex-row items-center rounded-2xl border border-border bg-card px-4`}
+                                >
+                                    <FontAwesome
+                                        name="lock"
+                                        size={18}
+                                        style={{
+                                            color: "#6B7280",
+                                            paddingRight: 8,
+                                        }}
+                                    />
+
+                                    <TextInput
+                                        value={password}
+                                        onChangeText={setPassword}
+                                        placeholder="Password"
+                                        placeholderTextColor={placeholderColour}
+                                        className="flex-1 text-foreground"
+                                        secureTextEntry={!isPasswordVisible}
+                                    />
+
+                                    <Pressable
+                                        onPress={() =>
+                                            setPasswordVisible(!isPasswordVisible)
+                                        }
+                                        hitSlop={10}
+                                    >
+                                        <FontAwesome
+                                            name={
+                                                isPasswordVisible
+                                                    ? "eye-slash"
+                                                    : "eye"
+                                            }
+                                            size={18}
+                                            style={{
+                                                color: "rgb(75 85 99 / 0.74)",
+                                                paddingRight: 8,
+                                            }}
+                                        />
+                                    </Pressable>
+                                </View>
+
+                                {passwordError && (
+                                    <TextFieldErrorMessage
+                                        errorMessage={passwordError}
+                                        marginBottom="mb-3"
+                                    />
+                                )}
+
+                                {/* Sign In */}
+                                <Pressable
+                                    className={`mt-6 flex-row items-center justify-center rounded-2xl border border-border bg-primary/80 px-4 py-3 ${
+                                        isSigningIn ? "bg-white/40" : ""
+                                    }`}
+                                    disabled={isSigningIn}
+                                    onPress={() => signIn(username, password)}
+                                >
+                                    <Text className="text-foreground">
+                                        {isSigningIn
+                                            ? SignInScreenData.signingIn
+                                            : SignInScreenData.submitBtn}
+                                    </Text>
+                                </Pressable>
+
+                            </View>
+
+                            <Text className="mt-3 text-center text-sm leading-5 text-muted-foreground">
+                                {SignInScreenData.TnC}
+                            </Text>
+
+                        </SafeAreaView>
+
+                    </View>
 
                 </View>
-
             </SafeAreaView>
         </TouchableWithoutFeedback>
     );

@@ -17,6 +17,7 @@ const SingleLineTextField = ({
                                  flexIndex = 1,
                                  errorMessage = "",
                                  maxLength = null,
+                                 secureTextEntry = false,
                              }) => {
 
     const isError = errorMessage;
@@ -43,6 +44,7 @@ const SingleLineTextField = ({
                     onChangeText={onChangeText}
                     readOnly={readOnly}
                     maxLength={maxLength}
+                    secureTextEntry={secureTextEntry}
                 />
             </View>
 

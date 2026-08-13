@@ -1,27 +1,28 @@
 import {useState} from "react";
-import {emailValidation, passwordValidation} from "../validations/auth.validation";
-import {authService} from "../services/authService";
-import {router} from "expo-router";
+import {passwordValidation, usernameValidation} from "../validations/auth.validation";
+import {useAuth} from "../context/AuthContext";
 
 export function useSignIn() {
-    const [emailError, setEmailError] = useState("");
+    const [usernameError, setUsernameError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const [isSigningIn, setSigningIn] = useState(false);
 
+    const {login} = useAuth();
 
-    const signIn = async (email, password) => {
+
+    const signIn = async (username, password) => {
 
         setSigningIn(true);
 
-        const {validationStatus: emailValid, errorMessage: emailMessage} = emailValidation(email);
+        const {validationStatus: usernameValid, errorMessage: usernameMessage} = usernameValidation(username);
         const {validationStatus: passwordValid, errorMessage: passwordMessage} = passwordValidation(password);
 
-        if (!emailValid) {
-            setEmailError(emailMessage);
+        if (!usernameValid) {
+            setUsernameError(usernameMessage);
             setSigningIn(false);
             return false;
         }
-        setEmailError("");
+        setUsernameError("");
 
         if (!passwordValid) {
             setPasswordError(passwordMessage);
@@ -32,18 +33,20 @@ export function useSignIn() {
 
 
         // API login here
-        // await authService.login(email,password)
-        authService({email: email, password: password}) && router.replace('../(tabs)')
+        // Login through AuthContext
+        const result = await login(username, password);
+
+        if (!result.success) setUsernameError("Username or Password is Incorrect");
 
         setSigningIn(false);
 
-        return true;
+        return result.success;
     };
 
 
     return {
         signIn,
-        emailError,
+        usernameError: usernameError,
         passwordError,
         isSigningIn,
     };

@@ -39,7 +39,7 @@ const Delivery = () => {
     };
 
     return (
-        <View className={'flex-1 px-4 py-6 bg-transparent'}>
+        <View className={'flex-1 px-4 pt-6 pb-3 bg-transparent'}>
             <View className={''}>
                 <Text className={'text-3xl text-foreground font-semibold'}>Delivery Details</Text>
                 <Text className={'text-foreground/60'}>Below are the list of devices needed to be handover</Text>
@@ -99,12 +99,15 @@ const Delivery = () => {
                 }}
             />
 
-            <View className={'pl-3'}>
-                <TextFieldErrorMessage errorMessage={errorMessage} marginBottom={'mb-1'}/>
-            </View>
+            {
+                errorMessage &&
+                <View className={'pl-3'}>
+                    <TextFieldErrorMessage errorMessage={errorMessage} marginBottom={'mb-1'}/>
+                </View>
+            }
             <SubmitButton
                 text={"Complete Delivery"}
-                marginTop={'mt-1'}
+                marginTop={'mt-3'}
                 onPress={() => {
 
                     if (!deliveryValidation(devices)) {

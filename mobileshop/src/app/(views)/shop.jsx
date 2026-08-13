@@ -5,6 +5,7 @@ import {useState} from "react";
 import Delivery from "./tabs/delivery";
 import {Stack, useLocalSearchParams} from "expo-router";
 import {TabButton} from "../../components/TabButton";
+import {SafeAreaView} from "react-native-safe-area-context";
 
 const Shop = () => {
 
@@ -41,11 +42,12 @@ const Shop = () => {
 
             </View>
 
-            <View className={'flex-1'}>
-                {currentTab === "visit" && <Visit onContinue={() => setCurrentTab("delivery")}/>}
-                {currentTab === "delivery" && <Delivery/>}
-            </View>
-
+            <SafeAreaView className={'flex-1'} edges={['bottom']}>
+                <View className={'flex-1'}>
+                    {currentTab === "visit" && <Visit onContinue={() => setCurrentTab("delivery")}/>}
+                    {currentTab === "delivery" && <Delivery/>}
+                </View>
+            </SafeAreaView>
 
         </>
     );

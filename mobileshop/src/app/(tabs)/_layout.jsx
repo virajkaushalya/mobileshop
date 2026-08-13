@@ -21,10 +21,18 @@ export default function TabsLayout() {
 
             <NativeTabs.Trigger name="report">
                 <NativeTabs.Trigger.Icon sf={{
-                    default: "list.clipboard",
-                    selected: "list.clipboard.fill"
+                    default: "list.bullet.rectangle.portrait",
+                    selected: "list.bullet.rectangle.portrait.fill"
                 }} md="docs"/>
                 <NativeTabs.Trigger.Label>Report</NativeTabs.Trigger.Label>
+            </NativeTabs.Trigger>
+
+            <NativeTabs.Trigger name="profile">
+                <NativeTabs.Trigger.Icon sf={{
+                    default: "person",
+                    selected: "person.fill"
+                }} md="account_circle"/>
+                <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
             </NativeTabs.Trigger>
 
         </NativeTabs>

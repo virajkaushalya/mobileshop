@@ -11,7 +11,7 @@ const ChequeDataTile = ({
                         }) => {
     return (
         <View
-            className={'mx-3 mb-2 pr-5 py-3 flex-1 flex-row bg-white/50 dark:bg-white/20 rounded-3xl border border-gray-400 dark:border-white/40'}>
+            className={'mx-3 mb-2 pr-5 py-3 flex-row bg-white/50 dark:bg-white/20 rounded-3xl border border-gray-400 dark:border-white/40'}>
 
             <Pressable
                 className={'pl-3 pr-2'}
